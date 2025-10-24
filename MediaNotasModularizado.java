@@ -4,19 +4,19 @@ import java.util.Scanner;
 
 public class MediaNotasModularizado {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) { //en el main llamo a las funciones ppedirNumeroAlumnos y calcularMedia
         Scanner sc = new Scanner(System.in);
 
         int numAlumnos = pedirNumeroAlumnos(sc);
         double media = calcularMedia(numAlumnos, sc);
 
-        System.out.println("La media del grupo es: " + media);
+        System.out.printf("La media del grupo es: %.2f", media);
 
         sc.close();
     }
 
 
-    public static int pedirNumeroAlumnos(Scanner sc) {
+    private static int pedirNumeroAlumnos(Scanner sc) { //pido el numero de alumnos y se verifica que sea un numero valido
         int numAlumnos;
         do {
             System.out.print("Introduce el número de alumnos: ");
@@ -28,8 +28,16 @@ public class MediaNotasModularizado {
         return numAlumnos;
     }
 
-
-    public static double pedirNotaAlumno(int numeroAlumno, Scanner sc) {
+    private static double calcularMedia(int numAlumnos, Scanner sc) { //se calcula la media de los alumnos, para ello, llamo a la funcion pedirNotaAlumno
+        double suma = 0;
+        for (int i = 1; i <= numAlumnos; i++) {
+            double nota = pedirNotaAlumno(i, sc);
+            suma += nota;
+        }
+        return suma / numAlumnos;
+    }
+    
+    private static double pedirNotaAlumno(int numeroAlumno, Scanner sc) { //se pide la nota del alumno correspondiente y se verifica que sea valida para poder usarse en el calculo de la media
         double nota;
         do {
             System.out.print("Introduce la nota del alumno " + numeroAlumno + ": ");
@@ -42,12 +50,5 @@ public class MediaNotasModularizado {
     }
 
 
-    public static double calcularMedia(int numAlumnos, Scanner sc) {
-        double suma = 0;
-        for (int i = 1; i <= numAlumnos; i++) {
-            double nota = pedirNotaAlumno(i, sc);
-            suma += nota;
-        }
-        return suma / numAlumnos;
-    }
+    
 }
